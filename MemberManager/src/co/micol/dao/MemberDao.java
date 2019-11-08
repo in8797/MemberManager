@@ -18,9 +18,25 @@ public class MemberDao extends DAO {
 		super();
 	}
 
-	public ArrayList<MemberDto> select(MemberDto dto) { // 전체회원 목록가져오기
+	public ArrayList<MemberDto> select() { // 전체회원 목록가져오기
 		list = new ArrayList<MemberDto>();
-		//
+
+		String sql = "select memberid,membername,memberenterdate,memberaddr,membertel from member";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				dto = new MemberDto();
+				dto.setId(rs.getString("memberid"));
+				dto.setName(rs.getString("membername"));
+				dto.seteDate(rs.getString("memberenterdate"));
+				dto.setAddr(rs.getString("memberaddr"));
+				dto.setTel(rs.getString("membertel"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		close();
 		return list;
 	}
@@ -35,6 +51,19 @@ public class MemberDao extends DAO {
 	public int insert(MemberDto dto) {
 		int n = 0;
 		//
+		String sql = "insert into member(memberid,membername,memberpw,memberaddr,membertel) values(?,?,?,?,?)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getPw());
+			psmt.setString(4, dto.getAddr());
+			psmt.setString(5, dto.getTel());
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		close();
 		return n;
 	}
@@ -53,8 +82,20 @@ public class MemberDao extends DAO {
 		return n;
 	}
 
-	public boolean isIdCheck(String id) { // id 중복체크를 위함
-		return false;
+	public boolean isIdCheck(String id) { // id 중복체크를 위함, 존재하면 false값을 전달
+		String sql = "select memberid from member where memberid=?";
+		boolean b = true;
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			if (rs.next())
+				b = false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		close();
+		return b;
 	}
 
 	public String loginCheck(String id, String pw) { // 로그인하는 메소드

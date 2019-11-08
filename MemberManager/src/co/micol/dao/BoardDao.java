@@ -5,6 +5,7 @@ package co.micol.dao;
  *상위 DAO클래스를 상속받아서 BoardDao를 생성
  */
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import co.micol.dto.BoardDto;
@@ -22,6 +23,19 @@ public class BoardDao extends DAO {
 		String sql = "select * from mvc_board";
 		if (id != 0)
 			sql = sql + " where bgroup = ?";
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			if(id !=0) psmt.setInt(1, id);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				dto = new BoardDto();
+				dto.setId(rs.getInt(""));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		close();
 		return list;
 	}
@@ -29,18 +43,21 @@ public class BoardDao extends DAO {
 	public int insert(BoardDto dto) {
 		int n = 0;
 
+		close();
 		return n;
 	}
 
 	public int update(BoardDto dto) {
 		int n = 0;
 
+		close();
 		return n;
 	}
 
 	public int delete(int id) {
 		int n = 0;
 
+		close();
 		return n;
 	}
 

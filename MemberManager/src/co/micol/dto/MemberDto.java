@@ -7,7 +7,7 @@ public class MemberDto {
 	private String name;
 	private String pw;
 	private String grant;
-	private Date eDate;
+	private String eDate;
 	private String addr;
 	private String tel;
 
@@ -47,11 +47,11 @@ public class MemberDto {
 		this.grant = grant;
 	}
 
-	public Date geteDate() {
+	public String geteDate() {
 		return eDate;
 	}
 
-	public void seteDate(Date eDate) {
+	public void seteDate(String eDate) {
 		this.eDate = eDate;
 	}
 
