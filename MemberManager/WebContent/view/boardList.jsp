@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,14 +13,14 @@
 			<jsp:include page="topmenu.jsp"></jsp:include>
 		</div>
 		<div>
-			<h1>공 지 사 항</h1>
+			<h1>자유게시판 목록</h1>
 		</div>
 		<div>
 			<table border="1">
 				<tr>
-					<th>작성자</th>
+					<th>순번</th>
 					<th>제목</th>
-					<th>내용</th>
+					<th>작성자</th>
 					<th>작성일자</th>
 					<th>조회수</th>
 				</tr>
@@ -28,13 +28,19 @@
 					<tr>
 						<td>${list.id }</td>
 						<td>${list.title }</td>
-						<td>${list.contents }</td>
-						<td>${list.nDate }</td>
+						<td>${list.writer }</td>
+						<td>${list.wDate }</td>
 						<td>${list.hit }</td>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
+		<c:if test="${id != null }">
+			<div>
+				<br>
+				<button type="button" onclick="location.href='boardWrite.do'">글쓰기</button>
+			</div>
+		</c:if>
 	</div>
 </body>
 </html>

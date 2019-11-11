@@ -12,6 +12,7 @@ public class BoardDto {
 	private int group;
 	private int step;
 	private int indent;
+	private String userId;
 
 	public BoardDto() {
 		// TODO Auto-generated constructor stub
@@ -87,6 +88,14 @@ public class BoardDto {
 
 	public void setIndent(int indent) {
 		this.indent = indent;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }

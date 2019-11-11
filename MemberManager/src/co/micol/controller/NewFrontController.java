@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.micol.command.IndexCommand;
+import co.micol.command.board.BoardListCommand;
+import co.micol.command.board.BoardReadCommand;
+import co.micol.command.board.BoardWriteCommand;
+import co.micol.command.board.BoardWriteOkCommand;
 import co.micol.command.member.LoginCommand;
 import co.micol.command.member.LoginOkCommand;
 import co.micol.command.member.LoginOutCommand;
@@ -44,10 +48,10 @@ public class NewFrontController extends HttpServlet {
 		cont.put("/memInsertOk.do", new MemInsertOkCommand());
 		cont.put("/memberList.do", new MemberListCommand()); //리스트 목록보기
 		cont.put("/noticeList.do", new NoticeListCommand()); //공지사항 리스트 목록 보기
-		cont.put("/noticeList.do", new NoticeListCommand());
-		cont.put("/noticeList.do", new NoticeListCommand());
-		cont.put("/noticeList.do", new NoticeListCommand());
-		cont.put("/noticeList.do", new NoticeListCommand());
+		cont.put("/boardList.do", new BoardListCommand()); //자유게시판 목록 보기
+		cont.put("/boardWrite.do", new BoardWriteCommand()); // 자유게시판 글쓰기
+		cont.put("/boardRead.do", new BoardReadCommand()); //자유게시판 글 읽기
+		cont.put("/boardWriteOk.do", new BoardWriteOkCommand()); //자유게시판 글쓰기 성공여부
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

@@ -44,7 +44,7 @@
 						</c:choose>
 					</ul></li>
 				<li>|</li>
-				<li class="topMenuLi"><a class="menuLink" href="#">자유게시판</a></li>
+				<li class="topMenuLi"><a class="menuLink" href="boardList.do">자유게시판</a></li>
 				<li>|</li>
 				<c:choose>
 					<c:when test="${id ==null }">

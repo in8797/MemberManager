@@ -1,4 +1,4 @@
-package co.micol.command.notice;
+package co.micol.command.board;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,24 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.micol.common.Command;
-import co.micol.dao.NoticeDao;
-import co.micol.dto.NoticeDto;
+import co.micol.dao.BoardDao;
+import co.micol.dto.BoardDto;
 
-public class NoticeListCommand implements Command {
+public class BoardListCommand implements Command {
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		NoticeDao dao = new NoticeDao();
-		ArrayList<NoticeDto> list = new ArrayList<NoticeDto>();
-		int length = list.size();
-		list = dao.select(); // 전체 리스트 가져오기
-
+		BoardDao dao = new BoardDao();
+		ArrayList<BoardDto> list = new ArrayList<BoardDto>();
+		list = dao.select();
+				// dto서넝ㄴ
 		request.setAttribute("list", list);
-		request.setAttribute("length", length);
-		String path = "view/noticeList.jsp";
+		// 돌려줄페이지선택
+		String path = "view/boardList.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 		dispatcher.forward(request, response);
+
 	}
 
 }

@@ -48,3 +48,18 @@ function idCheck() {
 		window.open("idCheck.do?id=" + id, "", "width=600,height=400");
 	}
 }
+
+function writeCheck() {
+	if (frm.title.value == "") {
+		alert("제목을 입력하세요");
+		frm.title.focus();
+		return false;
+	}
+	if (frm.contents.value == "") {
+		alert("내용을 입력하세요");
+		frm.contents.focus();
+		return false;
+	}
+	return true;
+}
+

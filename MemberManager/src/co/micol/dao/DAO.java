@@ -6,6 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 /**
  * 
  * @author 최인호 작성일자 : 2019-11-07 상위 dao객체
@@ -15,19 +20,30 @@ public class DAO {
 	Connection conn;
 	PreparedStatement psmt;
 	ResultSet rs;
-
-	private String driver = "oracle.jdbc.driver.OracleDriver";
-	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private String user = "micol";
-	private String password = "1234";
+	DataSource ds; //커넥션 POOL사용을 위한 데이터 연결 생성 객체 
+//	private String driver = "oracle.jdbc.driver.OracleDriver";
+//	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
+//	private String user = "micol";
+//	private String password = "1234";
 
 	public DAO() {
+//		try {
+//			Class.forName(driver);
+//			conn = DriverManager.getConnection(url, user, password);
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//		}
+		
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, user, password);
-		} catch (ClassNotFoundException | SQLException e) {
+			Context initContext = new InitialContext();
+			Context	envContext = (Context)initContext.lookup("java:/comp/env");
+			ds = (DataSource)envContext.lookup("jdbc/myoracle");
+			conn = ds.getConnection();
+		} catch (NamingException | SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//etc.
 	}
 
 	public void close() {
